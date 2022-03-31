@@ -53,7 +53,7 @@ function playRound() {
     computerChoice.textContent = computerSelection;
     console.log("You threw " + playerSelection + ".");
     console.log("Computer threw " + computerSelection + ".");
-    console.log(result(playerSelection, computerSelection));
+    result(playerSelection, computerSelection);
 
     if (playerScore === 5) {
 
