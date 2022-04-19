@@ -1,127 +1,115 @@
-const rockButton = document.querySelector('[data-choice="rock"]');
-const paperButton = document.querySelector('[data-choice="paper"]');
-const scissorsButton = document.querySelector('[data-choice="scissors"]');
-const resetButton = document.querySelector('[data-choice="reset"]');
-const startButton = document.querySelector('.start');
-const playerScoreTxt = document.querySelector('.player-score');
-const computerScoreTxt = document.querySelector('.computer-score');
-const playerChoiceDiv = document.querySelector('.player-choice-div');
-const computerChoiceDiv = document.querySelector('.computer-choice-div');
-const playerChoice = document.querySelector('.player-choice');
-const computerChoice = document.querySelector('.computer-choice');
-const gameStatus = document.querySelector('.game-status');
+const roundElement = document.querySelector('.round');
+const restartButton = document.querySelector('.restart');
+const rockButton = document.querySelector('.rock');
+const paperButton = document.querySelector('.paper');
+const scissorsButton = document.querySelector('.scissors');
+const gameStatus = document.querySelector('.status');
+const roundStatus = document.querySelector('.round');
+const playerScoreElement = document.querySelector('.player-score');
+const computerScoreElement = document.querySelector('.computer-score');
+const tiesElement = document.querySelector('.ties-score');
+const gameOver = document.querySelector('.game-over');
+const gameElements = document.querySelector('.game');
+const gameOverText = document.querySelector('.end-text');
+const playAgainButton = document.querySelector('.end-button');
+
+let computerSelection;
+let playerSelection;
+
 let playerScore = 0;
 let computerScore = 0;
+let tiesCount = 0;
+let round = 0;
 
 function computerPlay() {
-    const randomNumber = Math.floor(Math.random() * 3);
-    switch (randomNumber) {
-        case 0:
-        return "Paper";
-        case 1:
-        return 'Rock';
-        case 2:
-        return 'Scissors';
-    }
-    return randomNumber;
-};
-
-function result(playerSelection, computerSelection) {
-       if (
-      (playerSelection === "Rock" && computerSelection === "Scissors") ||
-      (playerSelection === "Paper" && computerSelection === "Rock") ||
-      (playerSelection === "Scissors" && computerSelection === "Paper")
-    ) {
-      playerScore++;
-      playerScoreTxt.textContent = playerScore;
-      gameStatus.textContent = 'You win this round!';
-      
-      } else if ( (computerSelection === "Rock" && playerSelection === "Scissors") ||
-    (computerSelection === "Paper" && playerSelection === "Rock") ||
-    (computerSelection === "Scissors" && playerSelection === "Paper")
-      ) {
-      computerScore++;
-      computerScoreTxt.textContent = computerScore;
-      gameStatus.textContent = 'Computer wins this round!';
+    
+    const random = Math.floor(Math.random() * 3);
+    if (random === 0) {
+        computerSelection = 'ROCK';
+    } else if (random === 1) {
+        computerSelection = 'PAPER';
     } else {
-      gameStatus.textContent = "It's a tie!";
+        computerSelection = 'SCISSORS'
     }
-};
+    return computerSelection
+}
 
 function playRound() {
-    let computerSelection = computerPlay();
-    computerChoice.textContent = computerSelection;
-    console.log("You threw " + playerSelection + ".");
-    console.log("Computer threw " + computerSelection + ".");
-    result(playerSelection, computerSelection);
 
-    if (playerScore === 5) {
-
-      gameStatus.textContent = 'Congratulations, you won!';
-      rockButton.classList.add('start-first');
-      paperButton.classList.add('start-first');
-      scissorsButton.classList.add('start-first');
-      resetButton.classList.add('start-first');
-      playerChoiceDiv.classList.add('start-first');
-      computerChoiceDiv.classList.add('start-first');
-      startButton.classList.remove('start-first');
-      
-    } else if (computerScore === 5) {
-      gameStatus.textContent = 'Sorry, computer won.';
-      rockButton.classList.add('start-first');
-      paperButton.classList.add('start-first');
-      scissorsButton.classList.add('start-first');
-      resetButton.classList.add('start-first');
-      playerChoiceDiv.classList.add('start-first');
-      computerChoiceDiv.classList.add('start-first');
-      startButton.classList.remove('start-first');
+    if (playerSelection === computerSelection) {
+        gameStatus.textContent = `It'a tie! You both chose ${playerSelection}.`;
+        tiesCount++
+        round++
+    } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSORS' || playerSelection === 'PAPER' && computerSelection === 'ROCK' || playerSelection === 'SCISSORS' && computerSelection === 'PAPER') {
+        gameStatus.textContent = `You won! ${playerSelection} beats ${computerSelection}`;
+        playerScore++
+        round++
+    } else {
+        gameStatus.textContent = `Computer won. ${computerSelection} beats ${playerSelection}`;
+        computerScore++
+        round++
     }
 
+    if (playerScore === 10 ) {
+        gameOverText.textContent = `Congratulations! You won!`;
+        gameElements.style.display = 'none';
+        gameOver.style.display = 'flex';
+    } else if (computerScore === 10) {
+        gameOverText.textContent = `Sorry! Computer won!`;
+        gameElements.style.display = 'none';
+        gameOver.style.display = 'flex';
+    }
 
-};
+    roundStatus.textContent = `Round ${round}`;
+    playerScoreElement.textContent = playerScore;
+    computerScoreElement.textContent = computerScore;
+    tiesElement.textContent = tiesCount;
+
+}
 
 
-rockButton.addEventListener("click", function () {
-    computerPlay();
-    playerSelection = 'Rock';
-    playRound();
-    playerChoice.textContent = 'Rock';
+
+rockButton.addEventListener('click', function() {
+    playerSelection = 'ROCK';
+    computerPlay()
+    playRound()
 })
 
-paperButton.addEventListener("click", function () {
-  computerPlay();
-  playerSelection = 'Paper';
-  playRound();
-  playerChoice.textContent = 'Paper';
+paperButton.addEventListener('click', function() {
+    playerSelection = 'PAPER';
+    computerPlay()
+    playRound()
 })
 
-scissorsButton.addEventListener("click", function () {
-  computerPlay();
-  playerSelection = 'Scissors';
-  playRound();
-  playerChoice.textContent = 'Scissors';
+scissorsButton.addEventListener('click', function() {
+    playerSelection = 'SCISSORS';
+    computerPlay()
+    playRound()
 })
 
-resetButton.addEventListener("click", function() {
-  playerScore = 0;
-  playerScoreTxt.textContent = playerScore;
-  computerScore = 0;
-  computerScoreTxt.textContent = computerScore;
+restartButton.addEventListener('click', function() {
+    playerScore = 0;
+    computerScore = 0;
+    tiesCount = 0;
+    round = 0;
+    gameStatus.textContent = `Press a button to start the game!`;
+    roundStatus.textContent = `Round ${round}`;
+    playerScoreElement.textContent = playerScore;
+    computerScoreElement.textContent = computerScore;
+    tiesElement.textContent = tiesCount;
 })
 
-startButton.addEventListener("click", function() {
-  playerScore = 0;
-  playerScoreTxt.textContent = playerScore;
-  computerScore = 0;
-  computerScoreTxt.textContent = computerScore;
-  rockButton.classList.remove('start-first');
-  paperButton.classList.remove('start-first');
-  scissorsButton.classList.remove('start-first');
-  resetButton.classList.remove('start-first');
-  playerChoiceDiv.classList.remove('start-first');
-  computerChoiceDiv.classList.remove('start-first');
-  startButton.classList.add('start-first');
-  playerChoice.textContent = '';
-  computerChoice.textContent = '';
-  gameStatus.textContent = '';
+playAgainButton.addEventListener('click', function() {
+    playerScore = 0;
+    computerScore = 0;
+    tiesCount = 0;
+    round = 0;
+    gameStatus.textContent = `Press a button to start the game!`;
+    roundStatus.textContent = `Round ${round}`;
+    playerScoreElement.textContent = playerScore;
+    computerScoreElement.textContent = computerScore;
+    tiesElement.textContent = tiesCount;
+
+    gameElements.style.display = 'flex';
+        gameOver.style.display = 'none';
 })

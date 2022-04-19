@@ -1,52 +1,43 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Rock Paper Scissors</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {height: 100vh; width: 100vw; color:white; display: flex; align-items: center; justify-content: center; flex-direction: column; background-color: rgb(61, 66, 73);}
-        .choices-made {display: flex; flex-direction: row;}
-        .btn-lg {width: 110px;}
-        .start-first { display: none;}
-    </style>
+    <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
- 
-    <div class="score text-center m-3">
-        <span class="computer-score display-3">0</span> <span class="display-3">:</span> <span class="player-score display-3">0</span>
+    <div class="game-over">
+        <h1 class="end-text"></h1>
+        <div class="button end-button">Play Again</div>
     </div>
-
-    <div class="game-status h5"></div>
-
-    <button class="btn btn-secondary btn-lg start start-first m-3">Start</button>
-
-    <div class="choices-made">
-        <div class="computer-choice-div m-3">
-            <h6>Computer chose:</h6>
-            <p class="computer-choice"></p>
+    <div class="game">
+        <div class="first-div">
+            <div class="round">Round 0</div>
+            <div class="restart">Restart</div>
         </div>
-        <div class="player-choice-div m-3">
-            <h6>Player chose:</h6>
-            <p class="player-choice"></p>
+        <div class="second-div">
+            <div class="scores-div">
+                <div class="names">
+                    <div class="player-name">Player</div>
+                    <div class="ties">Ties</div>
+                    <div class="computer-name">Computer</div>
+                </div>
+                <div class="scores">
+                    <div class="player-score">0</div>
+                    <div class="ties-score">0</div>
+                    <div class="computer-score">0</div>
+                </div>
+            </div>
+            <div class="status">Press a button to start the game!</div>
+        </div>
+        <div class="third-div">
+            <div class="rock button">Rock</div>
+            <div class="paper button">Paper</div>
+            <div class="scissors button">Scissors</div>
         </div>
     </div>
-
-    <div class="choices-available text-center m-2">
-        <button class="btn-secondary btn m-2 btn-lg" data-choice="rock">Rock</button>
-        <button class="btn-secondary btn m-2 btn-lg" data-choice="paper">Paper</button>
-        <button class="btn-secondary btn m-2 btn-lg" data-choice="scissors">Scissors</button>
-    </div>
-
-
-    <div class="reset m-4">
-
-    <div class="reset m-5">
-        <button class="btn btn-outline-light btn-sm" data-choice="reset">Reset</button>
-    </div>
-    <script src="script.js"></script>
 </body>
 </html>

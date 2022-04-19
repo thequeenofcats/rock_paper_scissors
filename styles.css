@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+:root {
+    --gray: #f0f0f0;
+    --teal: #00ADB5;
+    --dgray: #1f1f1f;
+    --black: #1d1d1d;
+}
+
+* {
+    background-color: var(--black);
+    color: var(--gray);
+    font-family: 'Bebas Neue', cursive;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+}
+
+.first-div {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--dgray);
+    border: 2px solid var(--teal);
+    border-radius: 5px;
+    margin-bottom: 50px;
+    width: 40vw;
+    max-width: 400px;
+}
+
+.second-div {
+    border: 2px solid var(--teal);
+    border-radius: 5px;
+    width: 40vw;
+    max-width: 400px;
+}
+
+.scores-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.names {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--teal);
+}
+
+.scores {
+    display: flex;
+    justify-content: space-around;
+    font-size: 4rem;
+}
+
+.player-name, .computer-name, .ties {
+    background-color: var(--teal);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.third-div {
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-between;
+    width: 40vw;
+    max-width: 400px;
+}
+
+.round {
+    font-size: 2.5rem;
+    background-color: var(--dgray);
+    margin: 0px 10px;
+    display: flex;
+}
+
+.restart {
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.4s all;
+}
+
+.restart:hover {
+    background-color: var(--teal);
+}
+
+.status {
+    border-top: 2px solid var(--teal);
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 5px 0px 3px;
+}
+
+.button {
+    border: 2px solid var(--teal);
+    width: 100px;
+    padding: 10px 0px;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    text-align: center;
+    transition: 0.4s all;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: var(--teal);
+}
+
+.game-over {
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.end-text {
+    letter-spacing: 3px;
+    font-size: 2.3rem;
+}
+
+@media (max-width: 850px) {
+    .third-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 50px;
+        width: 40vw;
+        align-items: center;
+    }
+
+    .third-div > * {
+        margin: 10px;
+    }
+
+    .button {
+        width: 100%;
+    }
+}
